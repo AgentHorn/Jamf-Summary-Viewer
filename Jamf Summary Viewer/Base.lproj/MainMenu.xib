@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -13,17 +16,19 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
-                <outlet property="theWindow" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
+                <outlet property="theSummaryPath" destination="Zkz-Yi-DDW" id="MCn-bW-CVH"/>
+                <outlet property="theTextPane" destination="uL0-Rc-nUI" id="VE0-Ia-VGH"/>
+                <outlet property="theWindow" destination="QvC-M9-y7g" id="CE5-nv-oIF"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
-                <menuItem title="Jamf Summary Viewer" id="1Xt-HY-uBw">
+                <menuItem title="Jamf Pro Summary" id="1Xt-HY-uBw">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Jamf Summary Viewer" systemMenu="apple" id="uQy-DD-JDr">
+                    <menu key="submenu" title="Jamf Pro Summary" systemMenu="apple" id="uQy-DD-JDr">
                         <items>
-                            <menuItem title="About Jamf Summary Viewer" id="5kV-Vb-QxS">
+                            <menuItem title="About Jamf Pro Summary" id="5kV-Vb-QxS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="orderFrontStandardAboutPanel:" target="-1" id="Exp-CZ-Vem"/>
@@ -37,7 +42,7 @@
                                 <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                            <menuItem title="Hide Jamf Summary Viewer" keyEquivalent="h" id="Olw-nP-bQN">
+                            <menuItem title="Hide Jamf Pro Summary" keyEquivalent="h" id="Olw-nP-bQN">
                                 <connections>
                                     <action selector="hide:" target="-1" id="PnN-Uc-m68"/>
                                 </connections>
@@ -55,7 +60,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                            <menuItem title="Quit Jamf Summary Viewer" keyEquivalent="q" id="4sb-4s-VLi">
+                            <menuItem title="Quit Jamf Pro Summary" keyEquivalent="q" id="4sb-4s-VLi">
                                 <connections>
                                     <action selector="terminate:" target="-1" id="Te7-pn-YzF"/>
                                 </connections>
@@ -668,7 +673,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                         <items>
-                            <menuItem title="Jamf Summary Viewer Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                            <menuItem title="Jamf Pro Summary Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                 <connections>
                                     <action selector="showHelp:" target="-1" id="y7X-2Q-9no"/>
                                 </connections>
@@ -677,16 +682,950 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="140" y="154"/>
         </menu>
-        <window title="Jamf Summary Viewer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
+        <window title="Jamf Pro Summary" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="480" height="360"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="contentRect" x="335" y="390" width="1159" height="568"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
+                <rect key="frame" x="0.0" y="0.0" width="1159" height="568"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView fixedFrame="YES" borderType="line" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8t-cr-jX3">
+                        <rect key="frame" x="357" y="48" width="782" height="500"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <clipView key="contentView" drawsBackground="NO" id="Jri-86-URU">
+                            <rect key="frame" x="1" y="1" width="780" height="498"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="uL0-Rc-nUI">
+                                    <rect key="frame" x="0.0" y="0.0" width="780" height="498"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="minSize" width="780" height="498"/>
+                                    <size key="maxSize" width="788" height="10000000"/>
+                                    <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                </textView>
+                            </subviews>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="B2J-4g-o3G">
+                            <rect key="frame" x="-100" y="-100" width="240" height="16"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="q3L-O9-vAb">
+                            <rect key="frame" x="765" y="1" width="16" height="498"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="drB-VM-TJY">
+                        <rect key="frame" x="13" y="13" width="100" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="push" title="Import File" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vVz-Ft-S6W">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="importFileButton:" target="Voe-Tx-rLC" id="Ttt-7i-OX4"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zkz-Yi-DDW">
+                        <rect key="frame" x="112" y="22" width="1029" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" placeholderString="Jamf Pro Summary File ..." id="41M-kV-mUj">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="jK0-kW-hXs">
+                        <rect key="frame" x="20" y="49" width="329" height="471"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                        <clipView key="contentView" drawsBackground="NO" id="rHd-2I-iPV">
+                            <rect key="frame" x="0.0" y="0.0" width="329" height="471"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <view id="Npx-bp-Eni">
+                                    <rect key="frame" x="15" y="-27" width="312" height="2470"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <subviews>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L3C-q2-PSb">
+                                            <rect key="frame" x="15" y="2415" width="300" height="38"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Summary" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="car-ER-BME">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="summaryButton:" target="Voe-Tx-rLC" id="hE7-7D-DkG"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gMV-IN-quz">
+                                            <rect key="frame" x="15" y="2383" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Activation Code" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="tBB-Kb-Zc2">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="activationCodeButton:" target="Voe-Tx-rLC" id="Q4H-Jn-oFO"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zFQ-T4-Bv3">
+                                            <rect key="frame" x="15" y="2351" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Licensed Software" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="kER-kw-Cj9">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="licensedSoftwareButton:" target="Voe-Tx-rLC" id="SoO-O2-KuZ"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sdc-Ee-nda">
+                                            <rect key="frame" x="15" y="2319" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Policies" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="8gp-YZ-zUk">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="policiesButton:" target="Voe-Tx-rLC" id="jut-kQ-ejA"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HQZ-9D-5fm">
+                                            <rect key="frame" x="15" y="2287" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="OS X Configuration Profiles" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="rV4-BZ-l2o">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="osxconfigurationProfilesButton:" target="Voe-Tx-rLC" id="enq-lS-vgO"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="izf-0p-RwJ">
+                                            <rect key="frame" x="15" y="2255" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Managed Preference Profiles" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="72q-bP-PVF">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="managedPrefrenceProfilesButton:" target="Voe-Tx-rLC" id="VsU-oX-fGB"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZa-VU-3hV">
+                                            <rect key="frame" x="15" y="2223" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Restricted Software" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="Qp6-Gh-uvX">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="restrictedSoftwareButton:" target="Voe-Tx-rLC" id="Iti-eE-22T"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xh3-gL-PLy">
+                                            <rect key="frame" x="15" y="2191" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="PreStages" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="I2t-0V-Dr4">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="prestagesButton:" target="Voe-Tx-rLC" id="MPi-oJ-nCN"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rpX-aK-t5F">
+                                            <rect key="frame" x="15" y="2159" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Smart Computer Groups" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="NRo-ep-GA3">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="smartComputerGroupsButton:" target="Voe-Tx-rLC" id="dQa-u5-Nbl"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KIO-NN-C52">
+                                            <rect key="frame" x="15" y="2127" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Computer PreStage Enrollments" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="xv8-la-pSw">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="computerPrestageEnrollmentsButton:" target="Voe-Tx-rLC" id="fzN-U8-vea"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2fJ-bO-UEN">
+                                            <rect key="frame" x="15" y="2095" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Mac Applications" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="MDf-Fc-SPA">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="macApplicationsButton:" target="Voe-Tx-rLC" id="Ddu-pk-6qU"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MsU-41-1mE">
+                                            <rect key="frame" x="15" y="2063" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Patch Management Software Titles" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="pkc-XG-NUN">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="patchManagementSoftwareTitlesButton:" target="Voe-Tx-rLC" id="LmF-an-8OY"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oTL-wu-QED">
+                                            <rect key="frame" x="15" y="2031" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Patch Policies" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="DAt-kJ-YAn">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="patchPoliciesButton:" target="Voe-Tx-rLC" id="D9T-k9-Q5n"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bb7-uL-1bp">
+                                            <rect key="frame" x="15" y="1999" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Mobile Device Configuration Profiles" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="7e7-rb-Dnx">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="mobileDeviceConfigurationProfilesButton:" target="Voe-Tx-rLC" id="MZz-w6-H7Y"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Or3-vb-EHz">
+                                            <rect key="frame" x="15" y="1967" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Provisioning Profiles" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="b3D-Lb-KTR">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="provisioningProfilesButton:" target="Voe-Tx-rLC" id="8x6-hQ-gry"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uQK-ry-5AW">
+                                            <rect key="frame" x="15" y="1935" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Mobile Device Applications" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="51d-Tp-AX0">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="mobileDeviceApplicationsButton:" target="Voe-Tx-rLC" id="JFw-U7-z3A"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ln8-zY-plO">
+                                            <rect key="frame" x="15" y="1903" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="eBooks" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="Aka-pD-Oye">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="eBooksButton:" target="Voe-Tx-rLC" id="iHy-4q-brW"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="82h-wj-uYb">
+                                            <rect key="frame" x="15" y="1871" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Smart Mobile Device Groups" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="qRd-Xm-Fmk">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="smartMobileDeviceGroupsButton:" target="Voe-Tx-rLC" id="Qvt-AF-7Vd"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q3C-Qt-7Wd">
+                                            <rect key="frame" x="15" y="1839" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Classes" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="qYF-kc-vHH">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="classesButton:" target="Voe-Tx-rLC" id="XNQ-Hg-hMo"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hy1-h6-Aea">
+                                            <rect key="frame" x="15" y="1807" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Enrollment Profiles" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="j06-nJ-diG">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="enrollmentProfilesButton:" target="Voe-Tx-rLC" id="d3Z-6p-3PX"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rl7-5a-rA5">
+                                            <rect key="frame" x="15" y="1775" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Mobile Device PreStage Enrollments" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="Qog-hT-PiT">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="mobileDevicePrestageEnrollmentsButton:" target="Voe-Tx-rLC" id="bCY-jO-nR5"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="re2-TU-hkD">
+                                            <rect key="frame" x="15" y="1743" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Accounts" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="8fO-m8-1WB">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="accountsButton:" target="Voe-Tx-rLC" id="Ghx-jT-ceP"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EyK-IG-ZhU">
+                                            <rect key="frame" x="15" y="1711" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Groups" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="3kf-Nx-M9Y">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="groupsButton:" target="Voe-Tx-rLC" id="EHJ-P1-g2L"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B7h-hX-puq">
+                                            <rect key="frame" x="15" y="1679" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Password Policy" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="bx6-sR-qql">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="passwordPolicyButton:" target="Voe-Tx-rLC" id="Inf-hN-Awl"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dtl-2A-MS7">
+                                            <rect key="frame" x="15" y="1647" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="LDAP Servers" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="cAQ-2g-xKO">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="ldapServersButton:" target="Voe-Tx-rLC" id="wxL-Aa-CJ8"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7M9-TZ-4jx">
+                                            <rect key="frame" x="15" y="1615" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Cloud Identity Providers" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="4XS-z4-B81">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="cloudIdentityProvidersButton:" target="Voe-Tx-rLC" id="uHt-vc-oNq"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2tV-Zu-PyO">
+                                            <rect key="frame" x="15" y="1583" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="SMTP Server" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="lJF-6c-1eE">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="smtpServerButton:" target="Voe-Tx-rLC" id="DWj-jW-mua"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WOe-cd-B0W">
+                                            <rect key="frame" x="15" y="1551" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Clustering" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="maQ-fF-X9h">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="clusteringButton:" target="Voe-Tx-rLC" id="L5u-mX-T8D"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dEa-gw-GjH">
+                                            <rect key="frame" x="15" y="1519" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Change Management" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="Puq-6H-va6">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="changeManagementButton:" target="Voe-Tx-rLC" id="M33-aZ-X72"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IBF-dr-eEo">
+                                            <rect key="frame" x="15" y="1487" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Apache Tomcat Settings" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="FuD-jT-xdb">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="apacheTomcatSettingsButton:" target="Voe-Tx-rLC" id="NTq-Jw-6gQ"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJX-BD-hmp">
+                                            <rect key="frame" x="15" y="1455" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Log Flushing" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="JVb-CZ-07o">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="logFlushingButton:" target="Voe-Tx-rLC" id="JfM-v9-SXf"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQV-dH-cwc">
+                                            <rect key="frame" x="15" y="1423" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Retention Policies" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="4Jo-aN-fAi">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="retentionPoliciesButton:" target="Voe-Tx-rLC" id="Ig6-B4-N5O"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jk4-vn-XQN">
+                                            <rect key="frame" x="15" y="1391" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Conditional Access and Device Compliance" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="w1m-Ud-z1V">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="conditionalAccessandDeviceComplianceButton:" target="Voe-Tx-rLC" id="wQp-Uw-nci"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="674-cE-6gt">
+                                            <rect key="frame" x="15" y="1359" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Push Certificates" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="qbz-wO-4nj">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="pushCertificatesButton:" target="Voe-Tx-rLC" id="nGp-P6-R2Y"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SRd-Kh-cxr">
+                                            <rect key="frame" x="15" y="1327" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="GSX Connection" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="TWw-Ss-Q0d">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="gsxConnectionButton:" target="Voe-Tx-rLC" id="9YH-A2-4DM"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XYg-HI-ySL">
+                                            <rect key="frame" x="15" y="1295" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="JSS URL" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="HVM-kS-JgC">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="jssURLButton:" target="Voe-Tx-rLC" id="e7t-Qy-aQl"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c7w-Ks-f5F">
+                                            <rect key="frame" x="15" y="1263" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="PKI Certificates" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="vLA-Ua-L14">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="pkiCertificatesButton:" target="Voe-Tx-rLC" id="dTM-G9-hLM"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TT0-wT-t0x">
+                                            <rect key="frame" x="15" y="1231" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Users" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="2nq-Xy-2Tz">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="usersButton:" target="Voe-Tx-rLC" id="6sU-Zj-HoC"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iJt-hc-h49">
+                                            <rect key="frame" x="15" y="1199" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="VPP Accounts" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="iP7-3q-3RZ">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="vppAccountsButton:" target="Voe-Tx-rLC" id="NBr-Ny-RDQ"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2js-LG-3Km">
+                                            <rect key="frame" x="15" y="1167" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="VPP Invitations" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="pYU-W9-eay">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="vppInvitationsButton:" target="Voe-Tx-rLC" id="wZ7-FY-2zz"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ivm-7Y-NIk">
+                                            <rect key="frame" x="15" y="1135" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="User Groups" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="8Mx-Pe-Cau">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="userGroupsButton:" target="Voe-Tx-rLC" id="hR1-Jm-TWz"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OMH-Yg-ZR9">
+                                            <rect key="frame" x="15" y="1103" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Device Enrollment Program" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="ub0-Vz-Jab">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="deviceEnrollmentProgramButton:" target="Voe-Tx-rLC" id="eC0-5G-Dtb"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ips-bq-Jc9">
+                                            <rect key="frame" x="15" y="1071" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Categories" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="p2N-7P-qMu">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="categoriesButton:" target="Voe-Tx-rLC" id="fEs-iG-jky"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="adg-3u-y9D">
+                                            <rect key="frame" x="15" y="1039" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Packages" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="boX-yO-HAy">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="packagesButton:" target="Voe-Tx-rLC" id="uqj-7r-I5F"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hpH-9q-Eeq">
+                                            <rect key="frame" x="15" y="1007" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Scripts" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="Y3B-Qu-oUO">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="scriptsButton:" target="Voe-Tx-rLC" id="SqT-yv-fPq"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fz8-To-sC7">
+                                            <rect key="frame" x="15" y="975" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Printers" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="UJO-V8-fc9">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="printersButton:" target="Voe-Tx-rLC" id="aUG-cN-jfU"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C2y-Dy-RW5">
+                                            <rect key="frame" x="15" y="943" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Directory Bindings" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="SSt-8p-JLB">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="directoryBindingsButton:" target="Voe-Tx-rLC" id="2X2-OE-e1s"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b3a-hW-CEW">
+                                            <rect key="frame" x="15" y="911" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Disk Encryption Configurations" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="Q9P-AW-07M">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="diskEncryptionConfigurationsButton:" target="Voe-Tx-rLC" id="vaV-Qb-sOZ"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="olt-Df-6NN">
+                                            <rect key="frame" x="15" y="879" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Dock Items" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="gL8-6E-KNS">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="dockItemsButton:" target="Voe-Tx-rLC" id="caJ-M9-ZLN"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LyA-q6-64v">
+                                            <rect key="frame" x="15" y="847" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Configurations" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="fWg-U9-hMw">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="configurationsButton:" target="Voe-Tx-rLC" id="aqP-Gc-mw8"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7K2-tj-jN8">
+                                            <rect key="frame" x="15" y="815" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Patch External Sources" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="OER-Qa-ivY">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="patchExternalSourcesButton:" target="Voe-Tx-rLC" id="21p-Z3-4qa"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HG4-G6-ttY">
+                                            <rect key="frame" x="15" y="783" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Cloud Distribution Point" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="7BF-fi-bLn">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="cloudDistributionPointButton:" target="Voe-Tx-rLC" id="YGd-ct-fam"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TXl-EM-fbq">
+                                            <rect key="frame" x="15" y="751" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="File Share Distribution Points" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="wzC-7b-cfo">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="fileShareDistributionPointsButton:" target="Voe-Tx-rLC" id="MLi-aT-dhH"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pkR-RI-cse">
+                                            <rect key="frame" x="15" y="719" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Software Update Servers" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="OKz-9c-STC">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="softwareUpdateServersButton:" target="Voe-Tx-rLC" id="JTj-l5-Ibd"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EkL-qv-au0">
+                                            <rect key="frame" x="15" y="687" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="User-Initiated Enrollment" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="jqa-7R-bUj">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="userInitiatedEnrollmentButton:" target="Voe-Tx-rLC" id="BiB-en-Pvg"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="55x-iH-MHV">
+                                            <rect key="frame" x="15" y="655" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Computer Inventory Collection" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="8vz-yX-Tmo">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="computerInventoryCollectionButton:" target="Voe-Tx-rLC" id="W5j-Ea-bbP"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P7R-03-HYB">
+                                            <rect key="frame" x="15" y="623" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Check-In" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="ZvM-uH-E71">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="checkInButton:" target="Voe-Tx-rLC" id="WkO-om-1sm"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hAd-e1-wDY">
+                                            <rect key="frame" x="15" y="591" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Security" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="mn9-rc-5kK">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="securityButton:" target="Voe-Tx-rLC" id="RIT-XZ-pDc"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y70-9d-FeJ">
+                                            <rect key="frame" x="15" y="559" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Computer Extension Attributes" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="bQ4-As-Qh4">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="computerExtensionAttributesButton:" target="Voe-Tx-rLC" id="HbX-gE-5Rk"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FOB-gx-a2f">
+                                            <rect key="frame" x="15" y="527" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Autorun Imaging" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="OxJ-PZ-gR6">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="autorunImagingButton:" target="Voe-Tx-rLC" id="Ago-eW-B9x"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-cl-oCY">
+                                            <rect key="frame" x="15" y="495" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Self Service" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="DA5-GO-pat">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="selfServiceButton:" target="Voe-Tx-rLC" id="Pl3-eL-lt8"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vic-x9-0FT">
+                                            <rect key="frame" x="15" y="463" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Self Service Bookmarks" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="thh-wY-Uzf">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="selfServiceBookmarksButton:" target="Voe-Tx-rLC" id="v6l-vO-p1C"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wVc-Ct-QC9">
+                                            <rect key="frame" x="15" y="431" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Peripheral Types" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="Yhx-xO-cdN">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="peripheralTypesButton:" target="Voe-Tx-rLC" id="Ip9-KG-3Sn"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fWu-rB-KqV">
+                                            <rect key="frame" x="15" y="399" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Removable MAC Addresses" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="n51-4d-ZdX">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="removableMACAddressesButton:" target="Voe-Tx-rLC" id="rIB-cL-tJk"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5gG-lR-9Tm">
+                                            <rect key="frame" x="15" y="367" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Mobile Device Inventory Collection" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="BSl-C7-9kO">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="mobileDeviceInventoryCollectionButton:" target="Voe-Tx-rLC" id="BY5-Px-YYb"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="53X-dG-J70">
+                                            <rect key="frame" x="15" y="335" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Mobile Device Extension Attributes" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="3Sd-nO-bcO">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="mobileDeviceExtensionAttributesButton:" target="Voe-Tx-rLC" id="I0c-5a-GcA"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kj6-Rj-Jtn">
+                                            <rect key="frame" x="15" y="303" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Mobile Device Self Service" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="aaY-XT-Kdd">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="mobileDeviceSelfServiceButton:" target="Voe-Tx-rLC" id="11G-Yc-AKd"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UyQ-at-Ol9">
+                                            <rect key="frame" x="15" y="271" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Mobile Device App Maintenance Settings" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="QBz-ai-2lB">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="mobileDeviceAppMaintenanceSettingsButton:" target="Voe-Tx-rLC" id="SFE-gC-IyW"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uZR-dC-Obl">
+                                            <rect key="frame" x="15" y="239" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Buildings" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="x4r-hm-BEQ">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="buildingsButton:" target="Voe-Tx-rLC" id="Xd4-iB-pRJ"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HMx-bV-Jld">
+                                            <rect key="frame" x="15" y="207" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Departments" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="HUA-ln-dFN">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="departmentsButton:" target="Voe-Tx-rLC" id="vxY-tM-hSm"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2x-QM-NAW">
+                                            <rect key="frame" x="15" y="175" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Network Segments" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="yaZ-cV-5XA">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="networkSegmentsButton:" target="Voe-Tx-rLC" id="dp3-TW-Nk0"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Gn-PM-7rc">
+                                            <rect key="frame" x="15" y="143" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Sites" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="RwW-BP-2ep">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="sitesButton:" target="Voe-Tx-rLC" id="aU9-R1-Dbd"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WL2-bK-76f">
+                                            <rect key="frame" x="15" y="111" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Webhooks" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="cg6-QK-vjD">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="webhooksButton:" target="Voe-Tx-rLC" id="9BW-ml-H6v"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lqt-zk-sdd">
+                                            <rect key="frame" x="15" y="79" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Jamf Parent" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="bGR-ma-jiB">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="jamfParentButton:" target="Voe-Tx-rLC" id="rAp-sj-iL5"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9JE-je-8IA">
+                                            <rect key="frame" x="15" y="47" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Table row counts" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="6bg-dk-mzq">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="tableRowCountsButton:" target="Voe-Tx-rLC" id="dof-ay-cyf"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jDA-YB-F6e">
+                                            <rect key="frame" x="15" y="15" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="Table sizes" bezelStyle="regularSquare" alignment="left" borderStyle="border" inset="2" id="oQu-PB-PI2">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="tableSizesButton:" target="Voe-Tx-rLC" id="2PN-25-cb0"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                            </subviews>
+                        </clipView>
+                        <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="r7e-A7-ffx">
+                            <rect key="frame" x="0.0" y="455" width="329" height="16"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="ASa-Tj-ROW">
+                            <rect key="frame" x="313" y="0.0" width="16" height="471"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ET-WX-IoR">
+                        <rect key="frame" x="161" y="524" width="175" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" title="Alphabetical" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="1Qy-r9-QkC" id="OYs-eG-egJ">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="LPV-G1-Igb">
+                                <items>
+                                    <menuItem title="Alphabetical" state="on" id="1Qy-r9-QkC"/>
+                                    <menuItem title="Summary Sorted" id="V9y-62-XEl"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                    </popUpButton>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ahq-4N-vlw">
+                        <rect key="frame" x="36" y="530" width="120" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Sort Items by..." id="88b-Zn-BdT">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
             </view>
+            <point key="canvasLocation" x="442.5" y="589"/>
         </window>
     </objects>
 </document>
